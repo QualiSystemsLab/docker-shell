@@ -6,7 +6,7 @@ from cloudshell.shell.core.resource_driver_interface import ResourceDriverInterf
 import uuid
 
 class DockerHostDriver (ResourceDriverInterface):
-    def __init__(self):
+    def __init__(self, domain_logic):
         pass
 
     # Initialize the driver session, this function is called everytime a new instance of the driver is created
@@ -135,6 +135,7 @@ class DockerHostDriver (ResourceDriverInterface):
         """
         json = self.inspect(context,ports)
         ip = json["Node"]["IP"]
+
         matching_resources = \
             self._get_api_session(context).FindResources(attributeValues=[AttributeNameValue("Private IP", ip)])\
                 .Resources
